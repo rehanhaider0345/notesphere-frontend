@@ -1,0 +1,52 @@
+React Notes App – Installation & Run Instructions
+
+
+System Requirements:
+
+Node.js (version 16 or above recommended)
+
+npm (comes with Node.js)
+
+Any modern web browser (Chrome, Edge, Firefox)
+
+
+Steps to Run the Application:
+
+1. Extract the ZIP folder.
+
+2. Open the extracted folder in a terminal.
+
+3. Install dependencies by running:
+
+	3.1npm install
+
+
+4. Start the development server:
+
+	4.1 npm start
+
+
+The application will automatically open in the browser at:
+
+http://localhost:3000
+
+
+Usage Notes:
+
+Notes are saved automatically using browser localStorage.
+
+No backend or database setup is required.
+
+The app works offline once loaded.
+
+Project Structure Overview
+
+src/ → React components and logic
+
+App.js → Main application logic
+
+NotesContext.jsx → Global notes state
+
+ThemeContext.jsx → Theme management
+
+FloatingBin.jsx → Drag-to-delete functionality
