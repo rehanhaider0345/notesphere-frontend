@@ -107,6 +107,7 @@ export function NotesProvider({ children, user })
   }
 
   // ================= LOAD =================
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() =>
   {
     const uid = getUserId()
@@ -121,7 +122,7 @@ export function NotesProvider({ children, user })
       setNotes([])
       setBinNotes([])
     }
-  }, [user?.user_id])   // ✅ FIXED (clean + stable)
+  }, [])
 
   // ================= ADD =================
   const addNote = async (note) =>
