@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useTheme } from '../context/ThemeContext'
+import API_BASE from '../config/api'
 
 function SessionHistory({ user })
 {
@@ -17,7 +18,7 @@ function SessionHistory({ user })
 
     setLoading(true)
 
-    fetch(`http://localhost/notesphere-api/get_sessions.php?user_id=${user.user_id}`)
+    fetch(`${API_BASE}/get_sessions.php?user_id=${user.user_id}`)
       .then(res => res.json())
       .then(data =>
       {
@@ -38,7 +39,7 @@ function SessionHistory({ user })
     {
       const storedUser = JSON.parse(localStorage.getItem("user"))
 
-      const res = await fetch("http://localhost/notesphere-api/clear_sessions.php",
+      const res = await fetch(`${API_BASE}/clear_sessions.php`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
