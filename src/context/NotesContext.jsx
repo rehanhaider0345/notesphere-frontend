@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react'
+import API_BASE from '../config/api'
 
 const NotesContext = createContext()
 
@@ -55,7 +56,7 @@ export function NotesProvider({ children, user })
 
     try
     {
-      const res = await fetch(`http://localhost/notesphere-api/get_notes.php?user_id=${uid}`)
+      const res = await fetch(`${API_BASE}/get_notes.php?user_id=${uid}`)
       const data = await safeJson(res)
 
       if (!Array.isArray(data))
@@ -86,7 +87,7 @@ export function NotesProvider({ children, user })
 
     try
     {
-      const res = await fetch(`http://localhost/notesphere-api/get_bin_notes.php?user_id=${uid}`)
+      const res = await fetch(`${API_BASE}/get_bin_notes.php?user_id=${uid}`)
       const data = await safeJson(res)
 
       console.log("BIN DATA:", data)
@@ -129,7 +130,7 @@ export function NotesProvider({ children, user })
     const uid = getUserId()
     if (!uid) return
 
-    await fetch("http://localhost/notesphere-api/add_note.php",
+    await fetch(`${API_BASE}/add_note.php`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -150,7 +151,7 @@ export function NotesProvider({ children, user })
   {
     const uid = getUserId()
 
-    await fetch("http://localhost/notesphere-api/update_note.php",
+    await fetch(`${API_BASE}/update_note.php`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -175,7 +176,7 @@ export function NotesProvider({ children, user })
     {
       console.log("Deleting note:", noteId)
 
-      const res = await fetch("http://localhost/notesphere-api/delete_note.php",
+      const res = await fetch(`${API_BASE}/delete_note.php`,
       {
         method: "POST",
         headers:
@@ -226,7 +227,7 @@ export function NotesProvider({ children, user })
   {
     const uid = getUserId()
 
-    await fetch("http://localhost/notesphere-api/restore_note.php",
+    await fetch(`${API_BASE}/restore_note.php`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -242,7 +243,7 @@ export function NotesProvider({ children, user })
   {
     const uid = getUserId()
 
-    await fetch("http://localhost/notesphere-api/permanent_delete.php",
+    await fetch(`${API_BASE}/permanent_delete.php`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
