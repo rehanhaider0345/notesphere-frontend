@@ -12,10 +12,11 @@ function BinModal({ open, onClose })
 
 
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() =>
   {
     fetchBinNotes()
-  }, [fetchBinNotes])   // ✅ UPDATED ONLY THIS LINE
+  }, [])
 
 
 
