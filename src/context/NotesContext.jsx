@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState, useCallback } from 'react'
 
 const NotesContext = createContext()
 
@@ -7,7 +7,7 @@ export function NotesProvider({ children, user })
   const [notes, setNotes] = useState([])
   const [binNotes, setBinNotes] = useState([])
 
-  const getUserId = () => user?.user_id || user?.id
+  const getUserId = useCallback(() => user?.user_id || user?.id, [user])
 
   // ================= SAFE JSON =================
   const safeJson = async (res) =>
@@ -43,7 +43,7 @@ export function NotesProvider({ children, user })
   })
 
   // ================= FETCH NOTES =================
-  const fetchNotes = async (userId) =>
+  const fetchNotes = useCallback(async (userId) =>
   {
     const uid = userId || getUserId()
 
@@ -71,10 +71,10 @@ export function NotesProvider({ children, user })
       console.log("FETCH NOTES ERROR:", err)
       setNotes([])
     }
-  }
+  }, [getUserId])
 
   // ================= FETCH BIN =================
-  const fetchBinNotes = async (userId) =>
+  const fetchBinNotes = useCallback(async (userId) =>
   {
     const uid = userId || getUserId()
 
@@ -104,10 +104,9 @@ export function NotesProvider({ children, user })
       console.log("BIN ERROR:", err)
       setBinNotes([])
     }
-  }
+  }, [getUserId])
 
   // ================= LOAD =================
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() =>
   {
     const uid = getUserId()
@@ -122,7 +121,7 @@ export function NotesProvider({ children, user })
       setNotes([])
       setBinNotes([])
     }
-  }, [])
+  }, [fetchNotes, fetchBinNotes, getUserId])
 
   // ================= ADD =================
   const addNote = async (note) =>
