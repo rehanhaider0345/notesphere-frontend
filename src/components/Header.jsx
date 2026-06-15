@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ConfirmModal from './ConfirmModal'
 import { useTheme } from '../context/ThemeContext'
+import API_BASE from '../config/api'
 import logo from '../assets/logo.png'
 
 function Header({
@@ -27,7 +28,7 @@ function Header({
     {
       if (user?.session_id)
       {
-        await fetch("http://localhost/notesphere-api/logout.php", {
+        await fetch(`${API_BASE}/logout.php`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -57,7 +58,7 @@ function Header({
 
     if (user?.user_id)
     {
-      await fetch("http://localhost/notesphere-api/update_theme.php", {
+      await fetch(`${API_BASE}/update_theme.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
