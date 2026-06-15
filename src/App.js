@@ -64,7 +64,7 @@ function App({ user, setUser })
     {
       fetchBinNotes()
     }
-  }, [binOpen])
+  }, [binOpen, fetchBinNotes])   // ✅ CHANGED HERE ONLY
 
   // ================= TAGS =================
   const getAllTags = useCallback(() =>
@@ -139,7 +139,6 @@ function App({ user, setUser })
   return (
     <div style={pageStyle}>
 
-      {/* HEADER */}
       <Header
         search={search}
         setSearch={setSearch}
@@ -159,7 +158,6 @@ function App({ user, setUser })
         onOpenSessions={() => setShowSessions(true)}
       />
 
-      {/* TOP BAR */}
       <div style={{
         ...container,
         display: 'flex',
@@ -195,7 +193,6 @@ function App({ user, setUser })
 
       </div>
 
-      {/* MAIN */}
       <main style={{ paddingTop: 30 }}>
         <div style={container}>
 
@@ -215,7 +212,6 @@ function App({ user, setUser })
             hoveredNoteId={hoveredNoteId}
             setHoveredNoteId={setHoveredNoteId}
 
-            // 🔥 DRAG SYSTEM
             onDragStart={(id) =>
             {
               console.log("DRAG START:", id)
@@ -236,7 +232,6 @@ function App({ user, setUser })
         </div>
       </main>
 
-      {/* FLOATING BIN */}
       <FloatingBin
         isActive={binOpen}
         onClick={() => setBinOpen(true)}
@@ -252,7 +247,6 @@ function App({ user, setUser })
         }}
       />
 
-      {/* BIN MODAL */}
       {binOpen && (
         <BinModal
           open={binOpen}
@@ -260,7 +254,6 @@ function App({ user, setUser })
         />
       )}
 
-      {/* SESSION MODAL */}
       {showSessions && (
         <div
           onClick={() => setShowSessions(false)}
@@ -309,7 +302,6 @@ function App({ user, setUser })
         </div>
       )}
 
-      {/* DELETE CONFIRM */}
       <ConfirmModal
         open={showDeleteConfirm}
         title="Delete note?"
@@ -324,7 +316,6 @@ function App({ user, setUser })
         }}
       />
 
-      {/* EDITOR */}
       <NoteEditorModal
         open={editorOpen}
         mode={editorMode}
