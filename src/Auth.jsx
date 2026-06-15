@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useTheme } from './context/ThemeContext'
+import API_BASE from './config/api'
 
 function Auth({ onAuthSuccess })
 {
@@ -39,8 +40,8 @@ function Auth({ onAuthSuccess })
     try
     {
       const url = isLogin
-        ? "http://localhost/notesphere-api/login.php"
-        : "http://localhost/notesphere-api/signup.php"
+        ? `${API_BASE}/login.php`
+        : `${API_BASE}/signup.php`
 
       const payload = isLogin
         ? { username: form.username, password: form.password }
@@ -71,7 +72,7 @@ function Auth({ onAuthSuccess })
         try
         {
           const themeRes = await fetch(
-            `http://localhost/notesphere-api/get_theme.php?user_id=${data.user.user_id}`
+            `${API_BASE}/get_theme.php?user_id=${data.user.user_id}`
           )
 
           const themeText = await themeRes.text()
