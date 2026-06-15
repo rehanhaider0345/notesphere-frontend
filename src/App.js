@@ -58,14 +58,13 @@ function App({ user, setUser })
   }, [])
 
   // ================= BIN LOAD =================
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() =>
   {
     if (binOpen)
     {
       fetchBinNotes()
     }
-  }, [binOpen])
+  }, [binOpen, fetchBinNotes])
 
   // ================= TAGS =================
   const getAllTags = useCallback(() =>
