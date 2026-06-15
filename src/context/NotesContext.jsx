@@ -121,7 +121,7 @@ export function NotesProvider({ children, user })
       setNotes([])
       setBinNotes([])
     }
-  }, [user?.user_id])
+  }, [user?.user_id])   // ✅ FIXED (clean + stable)
 
   // ================= ADD =================
   const addNote = async (note) =>
@@ -148,6 +148,8 @@ export function NotesProvider({ children, user })
   // ================= UPDATE =================
   const updateNote = async (id, updated) =>
   {
+    const uid = getUserId()
+
     await fetch("http://localhost/notesphere-api/update_note.php",
     {
       method: "POST",
@@ -161,7 +163,7 @@ export function NotesProvider({ children, user })
       })
     })
 
-    await fetchNotes()
+    await fetchNotes(uid)
   }
 
   // ================= DELETE =================
@@ -202,10 +204,8 @@ export function NotesProvider({ children, user })
 
       if (data.status === "success")
       {
-        // REMOVE instantly from UI
         setNotes(prev => prev.filter(n => n.id !== noteId))
 
-        // refresh bin so it appears there
         await fetchBinNotes(uid)
 
         console.log("Deleted ✅")
