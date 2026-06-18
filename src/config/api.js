@@ -1,3 +1,3 @@
-const API_BASE = "https://notesphere.free.je/api";
+const API_BASE = "https://notesphere-api.onrender.com";
 
 export default API_BASE;
